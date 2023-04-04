@@ -4,11 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import combineReducer from './store/index.js';
+
+const todoStore = createStore(combineReducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    {/* 리덕스 적용을 위해서는 무조건 provider로 감싸준다 */}
+    <Provider store={todoStore}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 

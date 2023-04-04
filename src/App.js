@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { Link, Route, Routes } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import BoardDetail from './components/BoardDetail';
+import Test from './components/Test';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<Header />}></Route> */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/test" element={<Test />} />
         <Route path="/board" element={<Board />} />
         {/* 라우터에 어떤 params값을 받을건지 선언해줘야함 */}
         <Route path="/board/:boardID" element={<BoardDetail />}></Route>
