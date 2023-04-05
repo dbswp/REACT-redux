@@ -5,20 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import combineReducer from './store/index.js';
+import rootReducer from './store/index.js';
+import { configureStore } from '@reduxjs/toolkit';
 
 const reduxDevTool =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-const todoStore = createStore(combineReducer, reduxDevTool);
-console.log(todoStore.getState());
+const store = configureStore({ reducer: rootReducer }, reduxDevTool);
+console.log(store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     {/* 리덕스 적용을 위해서는 무조건 provider로 감싸준다 */}
-    <Provider store={todoStore}>
+    <Provider store={store}>
       <App />
     </Provider>
   </BrowserRouter>

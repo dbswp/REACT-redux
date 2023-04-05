@@ -5,6 +5,7 @@ export default function DoneList() {
   const doneList = useSelector((state) => state.todo.list).filter(
     (el) => el.done === true
   );
+  console.log(doneList);
 
   return (
     <>
