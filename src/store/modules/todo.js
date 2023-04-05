@@ -11,12 +11,17 @@ const initState = {
       done: false,
     },
     {
-      id: 3,
+      id: 2,
       text: '프로젝트 잘 마무리하기',
       done: false,
     },
   ],
+  buyList: ['닌텐도', '자동차'],
+  todoListCount: 3,
 };
+
+let counts = initState.list.length;
+initState['nextID'] = counts;
 
 // 액션 타입 정하기
 const CREATE = 'todo/CREATE';
@@ -40,16 +45,35 @@ export default function todo(state = initState, action) {
     case CREATE:
       return {
         ...state,
-        list: state.list.concat({
-          id: action.playload.id,
-          text: action.playload.text,
-          done: false,
-        }),
+        // list: state.list.concat({
+        //   id: action.playload.id,
+        //   text: action.playload.text,
+        //   done: false,
+        // }),
+        list: [
+          ...state.list,
+          {
+            id: action.playload.id,
+            text: action.playload.text,
+            done: false,
+          },
+        ],
         nextID: action.playload.id + 1,
       };
     case DONE:
       return {
         ...state,
+        // 맵함수는 무조거너 ,return으로 받아야 배열로 반환됨
+        list: state.list.map((el) => {
+          if (el.id === action.id) {
+            return {
+              ...el,
+              done: true,
+            };
+          } else {
+            return el;
+          }
+        }),
       };
     default:
       return state;
