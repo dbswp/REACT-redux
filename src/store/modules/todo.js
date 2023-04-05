@@ -18,6 +18,40 @@ const initState = {
   ],
 };
 
+// 액션 타입 정하기
+const CREATE = 'todo/CREATE';
+const DONE = 'todo/DONE';
+
+export function create(playload) {
+  return {
+    type: CREATE,
+    playload,
+  };
+}
+export function done(id) {
+  return {
+    type: DONE,
+    id,
+  };
+}
+
 export default function todo(state = initState, action) {
-  return state;
+  switch (action.type) {
+    case CREATE:
+      return {
+        ...state,
+        list: state.list.concat({
+          id: action.playload.id,
+          text: action.playload.text,
+          done: false,
+        }),
+        nextID: action.playload.id + 1,
+      };
+    case DONE:
+      return {
+        ...state,
+      };
+    default:
+      return state;
+  }
 }

@@ -8,7 +8,11 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import combineReducer from './store/index.js';
 
-const todoStore = createStore(combineReducer);
+const reduxDevTool =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+const todoStore = createStore(combineReducer, reduxDevTool);
+console.log(todoStore.getState());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
