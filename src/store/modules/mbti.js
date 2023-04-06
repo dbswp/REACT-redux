@@ -128,13 +128,28 @@ const initState = {
   },
 };
 
+const initStateEmpty = {
+  mbtiResult: '',
+  page: 0,
+  survey: [],
+  explaination: {},
+};
+
 // action 타입 설정
 const CHECK = 'mbti/CHECK';
 const NEXT = 'mbti/NEXT';
 const RESET = 'mbti/RESER';
+const INIT = 'mbti/INIT';
 
 // action 생성 함수
 // payload -> 선택에 다른 결과 값 result 전달
+export function init(data) {
+  return {
+    type: INIT,
+    payload: data,
+  };
+}
+
 export function check(result) {
   return {
     type: CHECK,
@@ -152,8 +167,14 @@ export function reset() {
   };
 }
 
-export default function mbti(state = initState, action) {
+export default function mbti(state = initStateEmpty, action) {
   switch (action.type) {
+    case INIT:
+      return {
+        ...state,
+        survey: action.payload.survey,
+        explaination: action.payload.explaination,
+      };
     case CHECK:
       return {
         ...state,
